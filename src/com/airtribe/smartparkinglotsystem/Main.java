@@ -7,6 +7,7 @@ import com.airtribe.smartparkinglotsystem.factory.VehicleFactory;
 import com.airtribe.smartparkinglotsystem.repository.*;
 import com.airtribe.smartparkinglotsystem.service.*;
 
+import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,22 +16,46 @@ public class Main {
 
         VehicleRepository vehicleRepo = new VehicleRepository();
         ParkingTicketRepository parkingTicketRepo = new ParkingTicketRepository();
-        ParkingLotRepository parkingLotRepo = new ParkingLotRepository();
+        ParkingFloorRepository parkingFloorRepo = new ParkingFloorRepository();
         PaymentRepository paymentRepo = new PaymentRepository();
 
-        parkingLotRepo.add(new ParkingLot(1, "1st", ParkingLotType.MOTORCYCLE));
+        parkingFloorRepo.save(new ParkingFloor(1,"1st"));
+        parkingFloorRepo.save(new ParkingFloor(2,"2nd"));
 
-        parkingLotRepo.add(new ParkingLot(1, "1st", ParkingLotType.MOTORCYCLE));
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(1,
+                "1st", ParkingLotType.MOTORCYCLE),1);
 
-        parkingLotRepo.add(new ParkingLot(1, "1st", ParkingLotType.CAR));
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(2,
+                "1st", ParkingLotType.MOTORCYCLE),1);
 
-        parkingLotRepo.add(new ParkingLot(1, "1st", ParkingLotType.CAR));
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(3,
+                "1st", ParkingLotType.CAR),1);
 
-        parkingLotRepo.add(new ParkingLot(1, "1st", ParkingLotType.BUS));
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(4,
+                "1st", ParkingLotType.BUS),1);
 
-        parkingLotRepo.add(new ParkingLot(1, "1st", ParkingLotType.BUS));
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(10,
+                "1st", ParkingLotType.BUS),1);
 
-        ParkingLotAllocationService lotAllocationService = new ParkingLotAllocationService(parkingLotRepo);
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(7,
+                "2nd", ParkingLotType.BUS),2);
+
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(8,
+                "2nd", ParkingLotType.BUS),2);
+
+
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(5,
+                "2nd", ParkingLotType.CAR),2);
+
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(6,
+                "2nd", ParkingLotType.MOTORCYCLE),2);
+
+        parkingFloorRepo.addParkingLotToFloor(new ParkingLot(9,
+                "2nd", ParkingLotType.CAR),2);
+
+
+
+        ParkingLotAllocationService lotAllocationService = new ParkingLotAllocationService(parkingFloorRepo);
 
         FeeCalculationService feeCalculationService = new FeeCalculationService();
 
@@ -76,6 +101,10 @@ public class Main {
 
                     System.out.println("Vehicle Number");
                     String vehicleNumber = scanner.nextLine();
+                    if(vehicleRepo.exists(vehicleNumber)) {
+                        System.out.println("Vehicle Already Exists");
+                        break;
+                    }
 
                     System.out.println("Vehicle Type");
                     System.out.println("1. Motorcycle");
@@ -83,6 +112,7 @@ public class Main {
                     System.out.println("3. Bus");
 
                     int choise1;
+
                     try {
                         choise1 = scanner.nextInt();
                         scanner.nextLine();
@@ -136,7 +166,7 @@ public class Main {
 
                 case 3 :
                     System.out.println("\nAll Available Parking Lots");
-                    for(ParkingLot lots : parkingLotRepo.getAvailableParkingLots()){
+                    for(ParkingLot lots : parkingFloorRepo.getAvailableParkingLots()){
                         System.out.println(lots);
                     }
                    break;
@@ -144,12 +174,14 @@ public class Main {
                 case 4 :
                     System.out.println("\nAll Registered Vehicles");
 
-                    for(Vehicle vehicles : vehicleRepo.findAll()){
-                        if(vehicles == null){
-                            System.out.println("No Vehicle Found");
-                        }
-                        System.out.println(vehicles);
-                    }
+                  Collection<Vehicle> all = vehicleRepo.findAll();
+                  if(all.isEmpty()){
+                      System.out.println("No Vehicles Found");
+                  }else {
+                      for (Vehicle v : all) {
+                          System.out.println(v);
+                      }
+                  }
                     break;
 
                 case 5 :

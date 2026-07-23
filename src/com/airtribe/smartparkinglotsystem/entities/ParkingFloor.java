@@ -29,7 +29,9 @@ public class ParkingFloor {
     }
 
     public void addParkingLot(ParkingLot parkingLot) {
-        parkingLots.add(parkingLot);
+        synchronized (parkingLots) {
+            parkingLots.add(parkingLot);
+        }
     }
 
     @Override

@@ -1,20 +1,18 @@
 package com.airtribe.smartparkinglotsystem.entities;
 
-import java.time.LocalDateTime;
-
 public class ParkingLot {
 
     private long parkingLotId;
-    private String parkingFloorNumber;
+    private String floorName;
     private ParkingLotType  parkingLotType;
     private boolean available;
 
     public ParkingLot(long parkingLotId,
-                      String parkingFloorNumber,
+                      String floorName,
                       ParkingLotType parkingLotType) {
 
         this.parkingLotId = parkingLotId;
-        this.parkingFloorNumber = parkingFloorNumber;
+        this.floorName = floorName;
         this.parkingLotType = parkingLotType;
         this.available = true;
     }
@@ -24,30 +22,34 @@ public class ParkingLot {
     }
 
 
-    public String getParkingFloorNumber() {
-        return parkingFloorNumber;
+    public String getFloorName() {
+        return floorName;
     }
 
     public ParkingLotType getParkingLotType() {
         return parkingLotType;
     }
 
-    public boolean isAvailable() {
+    public synchronized boolean isAvailable() {
         return available;
     }
 
-    public void occupyParkingLot() {
-        this.available = false;
+    public synchronized boolean occupyIfAvailable() {
+        if(available) {
+            available = false;
+            return true;
+        }
+        return false;
     }
 
-    public void releaseParkingLot() {
+    public synchronized void releaseParkingLot() {
         this.available = true;
     }
 
     @Override
     public String toString() {
         return "Parking Lot Id: " + parkingLotId
-                + ", Parking Floor Number: " + parkingFloorNumber
+                + ", Floor Name: " + floorName
                 + ", Parking Lot Type: " + parkingLotType;
     }
 
