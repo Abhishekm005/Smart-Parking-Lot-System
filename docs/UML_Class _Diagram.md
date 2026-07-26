@@ -2,6 +2,8 @@
 ' Entities
 '========================
 
+---
+
 abstract class Vehicle {
 - vehicleId : long
 - vehicleType : VehicleType
@@ -56,9 +58,13 @@ class Payment {
 
 Payment --> ParkingTicket
 
+---
+
 '========================
 ' Repositories
 '========================
+
+---
 
 class VehicleRepository {
 - vehicles : Map<String, Vehicle>
@@ -83,10 +89,15 @@ class PaymentRepository {
 + save(p : Payment)
   }
 
+---
+
 '========================
 ' Services
 '========================
 
+---
+
+```text
 class ParkingLotAllocationService {
 - parkingFloorRepo : ParkingFloorRepository
 + allocateParkingLot(vt : VehicleType) : ParkingLot
@@ -132,11 +143,16 @@ class VehicleFactory {
 class IdGenerator {
 + nextId() : long
   }
+```
+---
 
 '========================
 ' Dependencies
 '========================
 
+---
+
+```text
 ParkingService --> CheckInService
 ParkingService --> CheckOutService
 ParkingService --> PaymentService
@@ -154,7 +170,7 @@ ParkingLotAllocationService --> ParkingFloorRepository
 
 VehicleFactory --> Vehicle
 VehicleFactory --> IdGenerator
-
+```
 
     
                                     +----------------------+
