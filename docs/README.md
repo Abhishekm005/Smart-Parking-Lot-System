@@ -38,7 +38,7 @@ and commonly used Design Patterns.
 
 ## Project Structure
 
-* text
+''''''text
 smart-parking-lot/
 │
 ├── src/
@@ -58,6 +58,8 @@ smart-parking-lot/
 │   └── schema.sql
 │
 └── README.md
+
+''''''
 
 ## Database Design
 
