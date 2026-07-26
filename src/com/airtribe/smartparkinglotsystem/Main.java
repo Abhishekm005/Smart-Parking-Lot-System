@@ -2,6 +2,7 @@ package com.airtribe.smartparkinglotsystem;
 
 import com.airtribe.smartparkinglotsystem.entities.*;
 import com.airtribe.smartparkinglotsystem.exception.InvalidVehicleException;
+import com.airtribe.smartparkinglotsystem.exception.ParkingFullException;
 import com.airtribe.smartparkinglotsystem.exception.VehicleNotFoundException;
 import com.airtribe.smartparkinglotsystem.factory.VehicleFactory;
 import com.airtribe.smartparkinglotsystem.repository.*;
@@ -79,7 +80,7 @@ public class Main {
                 System.out.println("1. Check In Vehicle");
                 System.out.println("2. Check Out Vehicle");
                 System.out.println("3. Show All Available Parking Lots");
-                System.out.println("4. Show All Vehicles");
+                System.out.println("4. Show All Registered Vehicles");
                 System.out.println("5. Exit");
 
                 int choice;
@@ -96,15 +97,41 @@ public class Main {
 
             switch (choice) {
                 case 1 :
-                    System.out.println("Owner Name");
-                    String ownerName = scanner.nextLine();
-
                     System.out.println("Vehicle Number");
                     String vehicleNumber = scanner.nextLine();
+
                     if(vehicleRepo.exists(vehicleNumber)) {
                         System.out.println("Vehicle Already Exists");
-                        break;
+                        try{
+                            System.out.println("1. To Park Registered Vehicle Enter Vehicle Number: ");
+                            System.out.println("2. Exit: ");
+                            System.out.print("Enter your Choice: ");
+                            int choice2 =  scanner.nextInt();
+                            scanner.nextLine();
+                            if(choice2 == 1){
+                                System.out.println("Enter Vehicle Number: ");
+                                String vehicleNumber2 = scanner.nextLine();
+                              ParkingTicket ticker2 = parkingTicketRepo.getActiveTicket(vehicleNumber2);
+                              if(ticker2 == null) {
+                                  Vehicle vehicle1 = vehicleRepo.findByVehicleNumber(vehicleNumber2);
+                                  ParkingTicket ticket = parkingService.parkVehicle(vehicle1);
+                                  System.out.println("Vehicle Parked Successfully");
+                                  System.out.println("Parking Ticket ID: " + ticket.getParkingTicketID());
+                                  System.out.println("Parking Lot: " + ticket.getParkingLot());
+                                  break;
+                              }else{
+                                  System.out.println("Vehicle Already Parked");
+                                  break;
+                              }
+                            }else break;
+                        }catch (Exception e){
+                            System.out.println("Enter Valid Input");
+                            continue;
+                        }
                     }
+
+                    System.out.println("Owner Name");
+                    String ownerName = scanner.nextLine();
 
                     System.out.println("Vehicle Type");
                     System.out.println("1. Motorcycle");
@@ -143,13 +170,16 @@ public class Main {
                     Vehicle vehicle = VehicleFactory.createVehicle(vehicleNumber, ownerName, type);
 
                     vehicleRepo.save(vehicle);
-                    ParkingTicket ticket = parkingService.parkVehicle(vehicle);
+                    try {
+                        ParkingTicket ticket = parkingService.parkVehicle(vehicle);
 
-                    System.out.println("Vehicle Parked Successfully");
-                    System.out.println("Parking Ticket ID: " + ticket.getParkingTicketID());
-                    System.out.println("Parking Lot: " + ticket.getParkingLot());
-                    break;
-
+                        System.out.println("Vehicle Parked Successfully");
+                        System.out.println("Parking Ticket ID: " + ticket.getParkingTicketID());
+                        System.out.println("Parking Lot: " + ticket.getParkingLot());
+                        break;
+                    }catch (ParkingFullException e){
+                        System.out.println("Parking Lot Full");
+                    }
                 case 2 :
                     try {
                         System.out.println("Vehicle Number: ");

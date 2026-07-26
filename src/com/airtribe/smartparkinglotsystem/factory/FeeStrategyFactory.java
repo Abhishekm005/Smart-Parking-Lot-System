@@ -1,6 +1,10 @@
-package com.airtribe.smartparkinglotsystem.strategy;
+package com.airtribe.smartparkinglotsystem.factory;
 
 import com.airtribe.smartparkinglotsystem.entities.VehicleType;
+import com.airtribe.smartparkinglotsystem.strategy.BusFeeStrategy;
+import com.airtribe.smartparkinglotsystem.strategy.CarFeeStrategy;
+import com.airtribe.smartparkinglotsystem.strategy.FeeStrategy;
+import com.airtribe.smartparkinglotsystem.strategy.MotorcycleFeeStrategy;
 
 public final class FeeStrategyFactory {
 

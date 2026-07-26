@@ -1,7 +1,7 @@
 package com.airtribe.smartparkinglotsystem.service;
 
 import com.airtribe.smartparkinglotsystem.entities.ParkingTicket;
-import com.airtribe.smartparkinglotsystem.strategy.FeeStrategyFactory;
+import com.airtribe.smartparkinglotsystem.factory.FeeStrategyFactory;
 import com.airtribe.smartparkinglotsystem.strategy.FeeStrategy;
 
 import java.time.Duration;

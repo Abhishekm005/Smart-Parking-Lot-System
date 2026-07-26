@@ -1,5 +1,6 @@
+---
 '========================
-' Entities
+##      Entities
 '========================
 
 ---
@@ -61,7 +62,7 @@ Payment --> ParkingTicket
 ---
 
 '========================
-' Repositories
+##     Repositories
 '========================
 
 ---
@@ -92,7 +93,7 @@ class PaymentRepository {
 ---
 
 '========================
-' Services
+##     Services
 '========================
 
 ---
@@ -147,7 +148,7 @@ class IdGenerator {
 ---
 
 '========================
-' Dependencies
+##    Dependencies
 '========================
 
 ---
