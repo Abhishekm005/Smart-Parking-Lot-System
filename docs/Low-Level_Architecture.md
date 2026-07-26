@@ -1,6 +1,6 @@
                     SMART PARKING LOT SYSTEM
                   LOW-LEVEL ARCHITECTURE (LLD)
-
+```text
 ┌──────────────────────────────────────────────────────────┐
 │                  PRESENTATION LAYER                      │
 │                                                        │
@@ -71,10 +71,10 @@
 │                              ▼                         │
 │                           Payment                      │
 └──────────────────────────────────────────────────────────┘
-
+```
 
                   DESIGN PATTERNS
-
+```text
 VehicleFactory
 │
 ├──► Car
@@ -86,7 +86,7 @@ FeeStrategy
 ├──► CarFeeStrategy
 ├──► MotorcycleFeeStrategy
 └──► BusFeeStrategy
-
+```
 Repository Pattern → Data Access
 Facade Pattern     → ParkingService
 Strategy Pattern   → Fee Calculation
@@ -94,7 +94,7 @@ Factory Pattern    → Vehicle Creation
 
 
                   CONCURRENCY HANDLING
-
+```text
 Vehicle 1 ──┐
 │
 ▼
@@ -108,13 +108,13 @@ Release Lock
 │
 ▼
 Vehicle 2 can allocate next available spot
-
+```
 This prevents two vehicles from receiving
 the same parking spot simultaneously.
 
 
                     DATABASE DESIGN
-
+```text
 ParkingFloor
 │
 │ 1 : N
@@ -128,10 +128,10 @@ ParkingTicket ◄──────── Vehicle
 │ 1 : 1
 ▼
 Payment
-
+```
 
                     SYSTEM FLOW
-
+```text
 Vehicle Entry
 │
 ▼
@@ -187,3 +187,4 @@ PaymentService
 │
 ▼
 Create Payment
+```
