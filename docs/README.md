@@ -2,13 +2,11 @@
 
 ## Overview
 
-The Smart Parking Lot System is a console-based backend application developed in Java 17.
-It simulates the core functionalities of a smart parking lot, including vehicle check-in,
-parking spot allocation, check-out, parking fee calculation, and real-time parking spot availability.
+The **Smart Parking Lot System** is a console-based backend application developed in **Java 17**. It simulates the core functionalities of a smart parking lot, including vehicle check-in, parking spot allocation, check-out, parking fee calculation, and real-time parking spot availability.
 
-This project demonstrates Object-Oriented Programming (OOP), SOLID principles,
-Layered Architecture**,
-and commonly used Design Patterns.
+This project demonstrates **Object-Oriented Programming (OOP)**, **SOLID principles**, **Layered Architecture**, and commonly used **Design Patterns**.
+
+---
 
 ## Features
 
@@ -21,6 +19,8 @@ and commonly used Design Patterns.
 * Payment Processing
 * Thread-Safe Spot Allocation using `synchronized`
 
+---
+
 ## Technologies Used
 
 * Java 17
@@ -29,6 +29,8 @@ and commonly used Design Patterns.
 * OOP
 * SOLID Principles
 
+---
+
 ## Design Patterns
 
 * Factory Pattern
@@ -36,9 +38,11 @@ and commonly used Design Patterns.
 * Repository Pattern
 * Service Layer Pattern
 
+---
+
 ## Project Structure
 
-''''''text
+```text
 smart-parking-lot/
 │
 ├── src/
@@ -58,8 +62,9 @@ smart-parking-lot/
 │   └── schema.sql
 │
 └── README.md
+```
 
-''''''
+---
 
 ## Database Design
 
@@ -73,6 +78,8 @@ The project includes a relational database schema with the following entities:
 
 The SQL schema is available in **`sql/schema.sql`**.
 
+---
+
 ## Functional Requirements
 
 * Automatic parking spot allocation based on vehicle type.
@@ -81,6 +88,8 @@ The SQL schema is available in **`sql/schema.sql`**.
 * Real-time parking spot availability updates.
 * Thread-safe handling of simultaneous vehicle entry and exit.
 
+---
+
 ## How to Run
 
 1. Clone the repository.
@@ -88,9 +97,11 @@ The SQL schema is available in **`sql/schema.sql`**.
 3. Configure **JDK 17**.
 4. Run `Main.java`.
 
+---
+
 ## Sample Menu
 
-* text
+```text
 ===== SMART PARKING LOT =====
 
 1. Check In Vehicle
@@ -98,6 +109,9 @@ The SQL schema is available in **`sql/schema.sql`**.
 3. Show Available Spots
 4. Show All Vehicles
 5. Exit
+```
+
+---
 
 ## Learning Outcomes
 
@@ -108,3 +122,8 @@ The SQL schema is available in **`sql/schema.sql`**.
 * Designed a relational database schema.
 * Implemented basic concurrency using `synchronized`.
 
+---
+
+## Author
+
+**Abhishek Kumar**
