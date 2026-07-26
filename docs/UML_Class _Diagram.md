@@ -3,7 +3,7 @@
 '========================
 
 ---
-
+```text
 abstract class Vehicle {
 - vehicleId : long
 - vehicleType : VehicleType
@@ -57,7 +57,7 @@ class Payment {
   }
 
 Payment --> ParkingTicket
-
+```
 ---
 
 '========================
@@ -65,7 +65,7 @@ Payment --> ParkingTicket
 '========================
 
 ---
-
+```text
 class VehicleRepository {
 - vehicles : Map<String, Vehicle>
 + save(v : Vehicle)
@@ -88,7 +88,7 @@ class ParkingTicketRepository {
 class PaymentRepository {
 + save(p : Payment)
   }
-
+```
 ---
 
 '========================
