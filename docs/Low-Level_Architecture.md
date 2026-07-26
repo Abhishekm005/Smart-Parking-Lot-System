@@ -3,73 +3,73 @@
 ```text
 ┌──────────────────────────────────────────────────────────┐
 │                  PRESENTATION LAYER                      │
-│                                                        │
-│                      Main.java                         │
-│   - Takes user input                                   │
-│   - Check-In / Check-Out                               │
-│   - Shows available parking spots                      │
+│                                                          │
+│                      Main.java                           │
+│   - Takes user input                                     │
+│   - Check-In / Check-Out                                 │
+│   - Shows available parking spots                        │
 └──────────────────────────┬───────────────────────────────┘
 │
 ▼
 ┌──────────────────────────────────────────────────────────┐
 │                    FACADE LAYER                          │
-│                                                        │
-│                   ParkingService                       │
-│   - parkVehicle()                                      │
-│   - checkOut()                                         │
+│                                                          │
+│                   ParkingService                         │
+│   - parkVehicle()                                        │
+│   - checkOut()                                           │
 └──────────────────────────┬───────────────────────────────┘
 │
 ▼
 ┌──────────────────────────────────────────────────────────┐
 │                    SERVICE LAYER                         │
-│                                                        │
-│  ┌────────────────┐      ┌─────────────────┐           │
-│  │ CheckInService │      │ CheckOutService │           │
-│  └───────┬────────┘      └────────┬────────┘           │
-│          │                        │                     │
-│          ▼                        ▼                     │
-│  ┌──────────────────┐    ┌──────────────────┐          │
-│  │ ParkingLot       │    │ FeeCalculation   │          │
-│  │ AllocationService│    │ Service          │          │
-│  └──────────────────┘    └──────────────────┘          │
-│                                                        │
-│                  ┌────────────────┐                    │
-│                  │ PaymentService │                    │
-│                  └────────────────┘                    │
+│                                                          │
+│  ┌────────────────┐      ┌─────────────────┐             │
+│  │ CheckInService │      │ CheckOutService │             │
+│  └───────┬────────┘      └────────┬────────┘             │
+│          │                        │                      │
+│          ▼                        ▼                      │
+│  ┌──────────────────┐    ┌──────────────────┐            │  
+│  │ ParkingLot       │    │ FeeCalculation   │            │
+│  │ AllocationService│    │ Service          │            │
+│  └──────────────────┘    └──────────────────┘            │
+│                                                          │
+│                  ┌────────────────┐                      │
+│                  │ PaymentService │                      │
+│                  └────────────────┘                      │
 └──────────────────────────┬───────────────────────────────┘
 │
 ▼
 ┌──────────────────────────────────────────────────────────┐
 │                  REPOSITORY LAYER                        │
-│                                                        │
-│  ┌─────────────────────┐  ┌────────────────────────┐   │
-│  │ VehicleRepository   │  │ ParkingFloorRepository│   │
-│  └─────────────────────┘  └────────────────────────┘   │
-│                                                        │
-│  ┌─────────────────────┐  ┌────────────────────────┐   │
-│  │ TicketRepository    │  │ PaymentRepository      │   │
-│  └─────────────────────┘  └────────────────────────┘   │
-│                                                        │
-│       Storage: HashMap / ArrayList / Collections        │
+│                                                          │
+│  ┌─────────────────────┐  ┌────────────────────────┐     │
+│  │ VehicleRepository   │  │ ParkingFloorRepository │     │
+│  └─────────────────────┘  └────────────────────────┘     │
+│                                                          │
+│  ┌─────────────────────┐  ┌────────────────────────┐     │
+│  │ TicketRepository    │  │ PaymentRepository      │     │
+│  └─────────────────────┘  └────────────────────────┘     │
+│                                                          │
+│       Storage: HashMap / ArrayList / Collections         │
 └──────────────────────────┬───────────────────────────────┘
 │
 ▼
 ┌──────────────────────────────────────────────────────────┐
 │                    MODEL LAYER                           │
-│                                                        │
-│                    Vehicle                             │
-│                       ▲                                │
-│              ┌────────┼────────┐                       │
-│              │        │        │                       │
-│             Car   Motorcycle   Bus                     │
-│                                                        │
-│  ParkingFloor ────────► ParkingSpot/ParkingLot         │
-│                              │                         │
-│                              ▼                         │
-│ Vehicle ─────────────► ParkingTicket                   │
-│                              │                         │
-│                              ▼                         │
-│                           Payment                      │
+│                                                          │
+│                    Vehicle                               │
+│                       ▲                                  │
+│              ┌────────┼────────┐                         │
+│              │        │        │                         │
+│             Car   Motorcycle   Bus                       │
+│                                                          │
+│  ParkingFloor ────────► ParkingSpot/ParkingLot           │
+│                              │                           │
+│                              ▼                           │
+│ Vehicle ─────────────► ParkingTicket                     │
+│                              │                           │
+│                              ▼                           │
+│                           Payment                        │
 └──────────────────────────────────────────────────────────┘
 ```
 

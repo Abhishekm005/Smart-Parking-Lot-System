@@ -155,6 +155,7 @@ ParkingLotAllocationService --> ParkingFloorRepository
 VehicleFactory --> Vehicle
 VehicleFactory --> IdGenerator
 
+
     
                                     +----------------------+
                                     |      Vehicle         |
@@ -171,6 +172,7 @@ VehicleFactory --> IdGenerator
                   |    Car    |           | Motorcycle  |        |    Bus    |
                   +-----------+           +-------------+        +-----------+
 
+```text
 +-----------------------+              +------------------------+
 |    ParkingFloor       |1            *|     ParkingLot        |
 +-----------------------+--------------+------------------------+
@@ -195,7 +197,6 @@ VehicleFactory --> IdGenerator
 +---------------------+
 |      Vehicle        |
 +---------------------+
-
       |
       |
       |1
@@ -219,3 +220,4 @@ VehicleFactory --> IdGenerator
 +------------------------+
 |   ParkingTicket        |
 +------------------------+
+```
