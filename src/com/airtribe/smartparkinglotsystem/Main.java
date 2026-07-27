@@ -1,9 +1,7 @@
 package com.airtribe.smartparkinglotsystem;
 
 import com.airtribe.smartparkinglotsystem.entities.*;
-import com.airtribe.smartparkinglotsystem.exception.InvalidVehicleException;
-import com.airtribe.smartparkinglotsystem.exception.ParkingFullException;
-import com.airtribe.smartparkinglotsystem.exception.VehicleNotFoundException;
+import com.airtribe.smartparkinglotsystem.exception.*;
 import com.airtribe.smartparkinglotsystem.factory.VehicleFactory;
 import com.airtribe.smartparkinglotsystem.repository.*;
 import com.airtribe.smartparkinglotsystem.service.*;
@@ -75,8 +73,6 @@ public class Main {
 
             System.out.println("\n=========Smart Parking Lots System==========");
 
-
-
                 System.out.println("1. Check In Vehicle");
                 System.out.println("2. Check Out Vehicle");
                 System.out.println("3. Show All Available Parking Lots");
@@ -90,26 +86,26 @@ public class Main {
                     choice = scanner.nextInt();
                     scanner.nextLine();
                 }catch (InputMismatchException e){
-                    System.out.println("Please enter a valid choice");
+                    System.out.println("Invalid Input");
                     scanner.nextLine();
                     continue;
                 }
 
             switch (choice) {
                 case 1 :
-                    System.out.println("Vehicle Number");
+                    System.out.print("Vehicle Number:");
                     String vehicleNumber = scanner.nextLine();
 
                     if(vehicleRepo.exists(vehicleNumber)) {
                         System.out.println("Vehicle Already Exists");
                         try{
-                            System.out.println("1. To Park Registered Vehicle Enter Vehicle Number: ");
-                            System.out.println("2. Exit: ");
+                            System.out.println("1. Park Registered Vehicle");
+                            System.out.println("2. Exit");
                             System.out.print("Enter your Choice: ");
                             int choice2 =  scanner.nextInt();
                             scanner.nextLine();
                             if(choice2 == 1){
-                                System.out.println("Enter Vehicle Number: ");
+                                System.out.print("Enter Vehicle Number: ");
                                 String vehicleNumber2 = scanner.nextLine();
                               ParkingTicket ticker2 = parkingTicketRepo.getActiveTicket(vehicleNumber2);
                               if(ticker2 == null) {
@@ -125,9 +121,9 @@ public class Main {
                               }
                             }else break;
                         }catch (Exception e){
-                            System.out.println("Enter Valid Input");
-                            continue;
+                            System.out.println("Invalid Input");
                         }
+                        break;
                     }
 
                     System.out.println("Owner Name");
@@ -144,9 +140,8 @@ public class Main {
                         choise1 = scanner.nextInt();
                         scanner.nextLine();
                     }catch (InputMismatchException e){
-                        System.out.println("Please enter a valid choice");
-                        scanner.nextLine();
-                        break;
+                        System.out.println("Invalid Input");
+                       break;
                     }
 
                     VehicleType type;
@@ -179,6 +174,7 @@ public class Main {
                         break;
                     }catch (ParkingFullException e){
                         System.out.println("Parking Lot Full");
+                        break;
                     }
                 case 2 :
                     try {
@@ -191,8 +187,8 @@ public class Main {
                         System.out.println("Amount : " + parkingTicket.getParkingFee());
                     }catch (VehicleNotFoundException e){
                         System.out.println("Vehicle Not Found");
+                        break;
                     }
-                    break;
 
                 case 3 :
                     System.out.println("\nAll Available Parking Lots");
